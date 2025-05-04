@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import Login from './componentes/login';
 import Header from './componentes/Header';
 import './App.css';
+import RegistroEmpresa from './pages/RegistroEmpresa';
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginWrapper />} />
+        <Route path="/login" element={<Login tipo="empresa" />} />
+        <Route path="/registro-empresa" element={<RegistroEmpresa />} />
       </Routes>
     </Router>
   )

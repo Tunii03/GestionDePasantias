@@ -14,6 +14,14 @@ export default function Home() {
                     Iniciar Sesión como Empresa
                 </Link>
             </div>
+            
+            <p className="register-message">
+                ¡Regístrate como empresa y contacta con alguno de nuestros candidatos!
+            </p>
+            
+            <Link to="/registro-empresa" className="register-link">
+                Registrate como empresa
+            </Link>
         </div>
     )
 }
