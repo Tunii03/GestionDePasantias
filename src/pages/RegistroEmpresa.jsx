@@ -27,24 +27,33 @@ export default function RegistroEmpresa() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
         try {
-            
-            // Mantener solo las llamadas fetch al backend:
-            const response = await fetch('http://localhost:8000/registro-empresa', {
-              method: 'POST',
-              headers: {'Content-Type': 'application/json'},
-              body: JSON.stringify({nombre, cuit, email, telefono, password})
-            });
-            
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.detail);
+            if (!validarCUIT(cuit)) {
+                setError('CUIT inválido (11 dígitos requeridos)');
+                return;
             }
             
-            navigate('/'); // Cambiado de '/verificacion' a '/'
+            const response = await fetch('http://localhost:8000/registro-empresa', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    nombre: nombre.trim(),
+                    cuit: cuit.trim(),
+                    email: email.trim(),
+                    telefono: telefono.trim(),
+                    password: password
+                })
+            });
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || 'Error en el servidor');
+            }
+            
+            navigate('/');
         } catch (err) {
-            setError('Error al registrar: ' + err.message);
+            console.error('Error completo:', err);
+            setError(err.message || 'Error al conectar con el servidor');
         }
     };
 
@@ -101,3 +110,6 @@ export default function RegistroEmpresa() {
         </div>
     );
 }
+
+// Elimina este console.log del final del archivo
+// console.log('Enviando:', {nombre, cuit, email, telefono, password});
