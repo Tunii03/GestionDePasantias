@@ -7,7 +7,7 @@ export default function Header() {
         <header className="header-container">
             <div className="logo">
                 <img src={logoUTN} alt="Logo UTN" style={{ height: '60px' }} />
-                <p className="welcome-message">¡Hola de nuevo Estudiante!</p>
+                <p className="welcome-message">¡Bienvenido al Sistema de Pasantías!</p>
             </div>
         </header>
     )

@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useSearchParams } from 'react-router-dom';
-import Home from './pages/Home';
+import Home from './pages/Home';  // Cambiado para importar de pages
 import Login from './componentes/login';
 import Header from './componentes/Header';
 import './App.css';
@@ -11,7 +11,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login tipo="empresa" />} />
+        <Route path="/login" element={<LoginWrapper />} />
         <Route path="/registro-empresa" element={<RegistroEmpresa />} />
       </Routes>
     </Router>
@@ -25,3 +25,4 @@ function LoginWrapper() {
 }
 
 export default App;
+

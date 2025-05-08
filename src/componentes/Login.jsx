@@ -16,35 +16,39 @@ export default function Login({ tipo }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         
-        // Validaciones
-        if (tipo === 'empresa') {
-            if (!/^\d{11}$/.test(cuit)) {
-                setError('El CUIT debe tener 11 dígitos');
-                return;
-            }
-        } else {
-            if (!/^\d+$/.test(legajo)) {
-                setError('El legajo debe ser numérico');
-                return;
-            }
-        }
-
-        if (password.length < 6) {
-            setError('La contraseña debe tener al menos 6 caracteres');
-            return;
-        }
-
         try {
-            // Aquí iría la lógica de autenticación con el backend
-            navigate('/'); // Redirige a la página principal
+            if ((tipo === 'empresa' && !cuit) || (tipo === 'estudiante' && !legajo) || !password) {
+                throw new Error('Todos los campos son obligatorios');
+            }
+
+            const response = await fetch(`http://localhost:8000/login-${tipo}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    [tipo === 'empresa' ? 'cuit' : 'legajo']: tipo === 'empresa' ? cuit : legajo,
+                    password: password
+                })
+            });
+
+            const contentType = response.headers.get('content-type');
+            if (!contentType || !contentType.includes('application/json')) {
+                throw new Error('Error en el servidor');
+            }
+
+            const data = await response.json();
+            if (!response.ok) {
+                throw new Error(data.error || 'Credenciales inválidas');
+            }
+            
+            navigate('/dashboard');
         } catch (err) {
-            setError('Error de autenticación');
+            setError(err.message);
         }
     };
 
     return (
         <div className="login-container">
-            <h1>Login {tipo}</h1>
+            <h1>Iniciar Sesión como {tipo === 'empresa' ? 'Empresa' : 'Estudiante'}</h1>
             <form onSubmit={handleSubmit}>
                 {error && <div className="error-message">{error}</div>}
 
@@ -59,11 +63,9 @@ export default function Login({ tipo }) {
                 ) : (
                     <input 
                         type="text" 
-                        placeholder="Ingresa tu legajo"
+                        placeholder="Legajo del estudiante"
                         value={legajo}
                         onChange={(e) => setLegajo(e.target.value)}
-                        inputMode="numeric"
-                        pattern="[0-9]*"
                         className="input"
                     />
                 )}

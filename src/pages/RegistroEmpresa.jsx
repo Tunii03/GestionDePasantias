@@ -52,7 +52,6 @@ export default function RegistroEmpresa() {
             
             navigate('/');
         } catch (err) {
-            console.error('Error completo:', err);
             setError(err.message || 'Error al conectar con el servidor');
         }
     };
@@ -110,6 +109,3 @@ export default function RegistroEmpresa() {
         </div>
     );
 }
-
-// Elimina este console.log del final del archivo
-// console.log('Enviando:', {nombre, cuit, email, telefono, password});
