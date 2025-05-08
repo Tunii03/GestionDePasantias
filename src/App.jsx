@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route, useSearchParams } from 'react-router-dom';
-import Home from './pages/Home';  // Cambiado para importar de pages
-import Login from './componentes/login';
-import Header from './componentes/Header';
+import Home from '@/pages/Home';
+import Login from '@/componentes/Login';
+import Header from '@/componentes/Header';
 import './App.css';
-import RegistroEmpresa from './pages/RegistroEmpresa';
+import RegistroEmpresa from '@/pages/RegistroEmpresa';
 
 function App() {
   return (
