@@ -1,0 +1,154 @@
+.welcome-message {
+    color: #036b9f;
+    font-weight: bold;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.home-container {
+    text-align: center;
+    padding: 2rem;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 400px;
+    margin: 2rem auto;
+}
+
+.role-btn {
+    padding: 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.student-btn {
+    background-color: #036b9f;
+    color: white;
+}
+
+.company-btn {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.role-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.home-container h1 {
+    color: #036b9f; /* Color azul institucional */
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: bold;
+    text-align: center;
+}
+.registrar-empresa-btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background-color: #036b9f;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 1rem;
+  }
+  .home-container {
+    padding: 1rem;
+}
+
+.home-container h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.button-group {
+    max-width: 300px;
+    gap: 0.5rem;
+}
+
+.role-btn {
+    padding: 0.6rem;
+    font-size: 0.85rem;
+}
+
+.registrar-empresa-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+}
+
+.role-btn {
+    padding: 0.75rem;
+    font-size: 0.9rem;
+}
+.home-container {
+    max-width: 100%;
+    padding: 2rem;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    animation: fadeIn 0.6s ease-out;
+}
+
+.home-container h1 {
+    color: var(--text);
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    font-weight: 600;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 380px;
+    width: 100%;
+}
+
+.role-btn {
+    padding: 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.role-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+.registrar-empresa-btn {
+    display: inline-block;
+    padding: 1rem;
+    background: linear-gradient(135deg, var(--primary) 0%, #0288d1 100%);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-top: 2rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.registrar-empresa-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}

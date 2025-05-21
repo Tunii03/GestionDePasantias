@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css';
+import './Home.css';
 
 export default function Home() {
     return (
@@ -12,6 +12,11 @@ export default function Home() {
                 </Link>
                 <Link to="/login?tipo=empresa" className="role-btn company-btn">
                     Iniciar Sesión como Empresa
+                </Link>
+            </div>
+            <div className='registrar-empresa'>
+                <Link to="/registrar-empresa" className="registrar-empresa-btn">
+                    Registrar Empresa
                 </Link>
             </div>
         </div>

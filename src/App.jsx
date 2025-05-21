@@ -1,16 +1,16 @@
 import { BrowserRouter as Router, Routes, Route, useSearchParams } from 'react-router-dom';
-import Home from './pages/Home';
-import Login from './componentes/login';
-import Header from './componentes/Header';
+import Home from './componentes/Login/Home/Home';
+import Login from './componentes/Login/Login/Login';
 import './App.css';
+import RegistrarEmpresa from './componentes/Login/RegistrarEmpresa/RegistrarEmpresa';
 
 function App() {
   return (
     <Router>
-      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<LoginWrapper />} />
+        <Route path="/registrar-empresa" element={<RegistrarEmpresa />} />
       </Routes>
     </Router>
   )
