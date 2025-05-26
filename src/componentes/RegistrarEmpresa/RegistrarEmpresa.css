@@ -164,3 +164,23 @@ body {
     animation: fadeIn 0.3s ease-out;
 }
 
+.formulario {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
