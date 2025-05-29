@@ -77,7 +77,7 @@ export default function Login({ tipo }) {
                 {error && <div className="error-message animate__animated animate__headShake">{error}</div>}
                 <div className="input-group">
                 {tipo === 'estudiante' ? (
-                    <label htmlFor="legajo" className="input-label">
+                    <div className="input-field">
                         Legajo:
                         <input 
                             type="text" 
@@ -88,16 +88,24 @@ export default function Login({ tipo }) {
                             name="legajo"
                             autoComplete="username"
                         />
-                    </label>
+                    </div>
                 ) : (
-                    <label htmlFor="email" className="input-label">
-                        Correo electrónico:
-                        <input type="email" value={legajo} onChange={handleLegajoChange} className="input" id="email"/>
-                    </label>
+                    <div className="input-field">
+                        Email:
+                        <input 
+                            type="email" 
+                            value={legajo} 
+                            onChange={handleLegajoChange} 
+                            className="input" 
+                            id="email"
+                            name="email"
+                        />
+                    </div>
                 )}
                 </div>
-                <div className="password-input-container">
-                <label htmlFor="password" className="input-label">
+                <div className="input-group">
+                <div className="password-field">
+                
                     Contraseña:    
                     <input 
                         type={showPassword ? "text" : "password"} 
@@ -108,10 +116,17 @@ export default function Login({ tipo }) {
                         name="password"
                         autoComplete="current-password"
                     />
-                    <button type="button" onClick={toggleShowPassword} className="toggle-password">
+            
+                    <button 
+                        type="button" 
+                        onClick={toggleShowPassword} 
+                        className="toggle-password"
+                        aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
+                    >
                         {showPassword ? '👁️' : '👁️‍🗨️'}
                     </button>
-                </label>
+                    
+                </div>
                 </div>
                 <button type="submit" className="btn">Ingresar</button>
             </form>
