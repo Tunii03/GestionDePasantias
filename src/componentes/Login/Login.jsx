@@ -2,18 +2,18 @@ import React, { useState } from 'react';
 import './Login.css';
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../config/firebase";
-import { doc, setDoc } from 'firebase/firestore';
+import { doc, updateDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 export default function Login({ tipo }) {
     const navigate = useNavigate(); // Agrega esta línea
-    const [legajo, setLegajo] = useState("");
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState("");
 
-    const handleLegajoChange = (event) => {
-        setLegajo(event.target.value);
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
     }
 
     const handlePasswordChange = (event) => {
@@ -28,7 +28,7 @@ export default function Login({ tipo }) {
         event.preventDefault();
         
         // Validación básica
-        if (legajo.length <= 3 || password.length <= 7) {
+        if (email.length <= 3 || password.length <= 6) {
             setError("Por favor, completa todos los campos correctamente");
             return;
         }
@@ -36,10 +36,9 @@ export default function Login({ tipo }) {
         try {
             let userCredential;
             if (tipo === 'estudiante') {
-                const email = `${legajo}@pasantias.com`;
                 userCredential = await signInWithEmailAndPassword(auth, email, password);
             } else {
-                userCredential = await signInWithEmailAndPassword(auth, legajo, password);
+                userCredential = await signInWithEmailAndPassword(auth, email, password);
             }
             
             
@@ -49,22 +48,19 @@ export default function Login({ tipo }) {
             // Guardar datos adicionales en Firestore
             // Reemplaza la parte de guardar en Firestore con:
             if (tipo === 'estudiante') {
-              await setDoc(doc(db, 'estudiantes', userUid), {
-                legajo: legajo,
-                email: `${legajo}@pasantias.com`,
+              await updateDoc(doc(db, 'estudiantes', userUid), {
+                email: email,
                 fechaAcceso: new Date()
               });
+              navigate('/dashboard-estudiante');
             } else {
               // En la parte de guardar datos de empresa:
-              await setDoc(doc(db, 'empresas', userUid), {
-                email: legajo,
-                nombre: '', // Agrega este campo
-                direccion: '', // Agrega este campo
-                telefono: '', // Agrega este campo // Agrega este campo
+              await updateDoc(doc(db, 'empresas', userUid), {
+                email: email,
                 fechaAcceso: new Date()
               });
+              navigate('/dashboard-empresa');
             }
-            navigate('/dashboard');
         } catch (error) {
             setError(error.message);
         }
@@ -78,14 +74,14 @@ export default function Login({ tipo }) {
                 <div className="input-group">
                 {tipo === 'estudiante' ? (
                     <div className="input-field">
-                        Legajo:
+                        Email:
                         <input 
-                            type="text" 
-                            value={legajo} 
-                            onChange={handleLegajoChange} 
+                            type="email" 
+                            value={email} 
+                            onChange={handleEmailChange} 
                             className="input" 
-                            id="legajo"
-                            name="legajo"
+                            id="email"
+                            name="email"
                             autoComplete="username"
                         />
                     </div>
@@ -94,8 +90,8 @@ export default function Login({ tipo }) {
                         Email:
                         <input 
                             type="email" 
-                            value={legajo} 
-                            onChange={handleLegajoChange} 
+                            value={email} 
+                            onChange={handleEmailChange} 
                             className="input" 
                             id="email"
                             name="email"

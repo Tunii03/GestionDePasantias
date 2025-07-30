@@ -18,6 +18,9 @@ export default function Home() {
                 <Link to="/registrar-empresa" className="registrar-empresa-btn">
                     Registrar Empresa
                 </Link>
+                <Link to="/registrar-estudiante" className="registrar-empresa-btn" style={{marginTop: '1rem', background: '#2563eb'}}>
+                    Registrar Estudiante
+                </Link>
             </div>
         </div>
     )

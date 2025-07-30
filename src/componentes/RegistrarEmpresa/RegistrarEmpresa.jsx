@@ -43,8 +43,8 @@ export default function RegistrarEmpresa() {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        if (!nombre || !email || !password || !cuit || !direccion || !telefono) {
-            setError("Por favor complete todos los campos");
+        if ([nombre, email, password, cuit, direccion, telefono].some(campo => !campo.trim())) {
+            setError("Por favor complete todos los campos correctamente (no solo espacios en blanco)");
             return;
         }
         
@@ -53,6 +53,14 @@ export default function RegistrarEmpresa() {
             // 1. Crear usuario en Authentication
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             
+            // Depuración: mostrar los valores a guardar
+            console.log({
+                nombre,
+                email,
+                cuit,
+                direccion,
+                telefono
+            });
             // 2. Guardar TODOS los datos en Firestore
             await setDoc(doc(db, 'empresas', userCredential.user.uid), {
                 nombre: nombre.trim(),
@@ -66,6 +74,7 @@ export default function RegistrarEmpresa() {
             setSuccess(true);
             setTimeout(() => navigate('/'), 2000); // Redirige después de 2 segundos
         } catch (error) {
+            console.error("Error al registrar empresa:", error);
             setError(error.message);
             setSuccess(false);
         }
@@ -91,7 +100,7 @@ export default function RegistrarEmpresa() {
                 </label>
                 <label>
                     Cuit:
-                    <input type="number" value={cuit} onChange={handleCuitChange} className='input'/>
+                    <input type="text" value={cuit} onChange={handleCuitChange} className='input'/>
                 </label>
                 <label>
                     Direccion:
@@ -99,7 +108,7 @@ export default function RegistrarEmpresa() {
                 </label>
                 <label>
                     Telefono:
-                    <input type="number" value={telefono} onChange={handleTelefonoChange} className='input'/>
+                    <input type="text" value={telefono} onChange={handleTelefonoChange} className='input'/>
                 </label>
                 <label>
                     Email:
